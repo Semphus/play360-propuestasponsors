@@ -1617,6 +1617,9 @@ html, body {
     -webkit-overflow-scrolling: touch;
   }
 
+  #bg-canvas { transform: translateX(15%); }
+
+
   /* Slides densos: alinear arriba para que el scroll arranque del inicio */
   .slide[data-slide="2"],
   .slide[data-slide="4"],
@@ -2984,11 +2987,8 @@ void main(){
   const spd = ease(C.speed / 100) * 5;
 
   function resize() {
-    const mob  = window.matchMedia('(max-width: 768px)').matches;
-    const wMul = mob ? 1.5 : 1;
-    canvas.width  = Math.round(innerWidth  * Math.min(devicePixelRatio, 2) * wMul);
-    canvas.height = Math.round(innerHeight * Math.min(devicePixelRatio, 2));
-    canvas.style.width  = mob ? (innerWidth * wMul) + 'px' : '';
+    canvas.width  = innerWidth  * Math.min(devicePixelRatio, 2);
+    canvas.height = innerHeight * Math.min(devicePixelRatio, 2);
     gl.viewport(0, 0, canvas.width, canvas.height);
   }
   resize();
