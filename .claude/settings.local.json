@@ -14,7 +14,9 @@
       "Bash(git -C \"C:/Users/Usuario/Documents/GitHub/play360-propuestasponsors\" status)",
       "Bash(git -C \"C:/Users/Usuario/Documents/GitHub/play360-propuestasponsors\" diff --stat)",
       "Bash(git *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "PowerShell(python --version)",
+      "PowerShell(node --version; npx --version)"
     ]
   }
 }
