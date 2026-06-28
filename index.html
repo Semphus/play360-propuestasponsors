@@ -1611,11 +1611,10 @@ html, body {
 
   /* ── Sistema base ── */
   .slide {
-    padding: 72px 5% 280px;
+    padding: 60px 5% 88px;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y; /* iOS: permite scroll vertical dentro del slide */
   }
 
   /* Slides densos: alinear arriba para que el scroll arranque del inicio */
@@ -1627,42 +1626,7 @@ html, body {
     justify-content: flex-start;
   }
 
-  /* Altura dinámica: evita que la barra del navegador iOS corte el contenido */
-  #slides-container {
-    height: 100vh;
-    height: 100dvh;
-  }
-
-  #navbar-wrapper {
-    bottom: 68px;
-    left: 16px;
-    right: 16px;
-    transform: none;
-    /* El wrapper no intercepta toques — solo los botones internos son clickeables */
-    pointer-events: none;
-  }
-
-  #navbar-wrapper * {
-    pointer-events: auto;
-  }
-
-  #poda {
-    width: 100%;
-  }
-
-  /* Glow layers — expandir al ancho del navbar */
-  #poda > div:not(#navbar-pill) {
-    max-width: 100% !important;
-  }
-
-  /* Píldora interior — llenar el ancho disponible */
-  #navbar-pill {
-    width: 100%;
-    gap: 14px;
-    padding-left: 16px;
-    padding-right: 16px;
-    justify-content: space-between;
-  }
+  #navbar-wrapper { bottom: 68px; }
   #progress-bar { height: 5px; }
 
   /* Ghost text — no puede desbordar la pantalla */
@@ -2819,7 +2783,7 @@ html, body {
     </div>
 
     <!-- Píldora principal — ancho ajustado al contenido, todo centrado -->
-    <div id="navbar-pill" class="relative bg-white h-[58px] rounded-[29px] flex items-center justify-center gap-2 px-6">
+    <div class="relative bg-white h-[58px] rounded-[29px] flex items-center justify-center gap-2 px-6">
 
       <!-- Logo Play 360 -->
       <img src="recursos/logo play 360 actualizado.png?v=2" alt="Play 360" class="w-auto select-none" draggable="false" style="height:42px; filter: saturate(0.65);">
@@ -3221,12 +3185,11 @@ document.addEventListener('wheel', e => {
 let touchY0 = 0;
 document.addEventListener('touchstart', e => { touchY0 = e.touches[0].clientY; }, { passive: true });
 document.addEventListener('touchend', e => {
-  /* Swipe deshabilitado en móvil y tablets — usar botones de navbar */
-  if (window.matchMedia('(max-width: 1024px)').matches) return;
   const delta = touchY0 - e.changedTouches[0].clientY;
   if (Math.abs(delta) > 50) {
     const active = document.querySelector('.slide.active');
     if (active) {
+      /* Si el slide tiene scroll interno, navegar solo cuando llega al borde */
       if (delta > 0 && active.scrollTop + active.clientHeight < active.scrollHeight - 10) return;
       if (delta < 0 && active.scrollTop > 10) return;
     }
